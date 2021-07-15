@@ -5,7 +5,7 @@ namespace MoodAnalyzerTest
     [TestClass]
     public class UnitTest1
     {
-        MoodAnalyse moodAnalyse = new MoodAnalyse();
+        MoodAnalyse moodAnalyse;
         /// <summary>
         /// TC 1.1
         /// </summary>
@@ -15,8 +15,9 @@ namespace MoodAnalyzerTest
             ///AAA MEthodology
             //Arrange
             string expected = "SAD";
+            moodAnalyse = new MoodAnalyse("I am in Sad Mood");
             //Act
-            string actual = moodAnalyse.AnalyseMood("I am in SAD mood");
+            string actual = moodAnalyse.AnalyseMood();
             //Assert
             Assert.AreEqual(expected, actual);
         }
@@ -29,8 +30,9 @@ namespace MoodAnalyzerTest
             ///AAA MEthodology
             //Arrange
             string expected = "HAPPY";
+            moodAnalyse = new MoodAnalyse("I am in Happy Mood");
             //Act
-            string actual = moodAnalyse.AnalyseMood("I am  in HAPPY  mood");
+            string actual = moodAnalyse.AnalyseMood();
             //Assert
             Assert.AreEqual(expected, actual);
         }
