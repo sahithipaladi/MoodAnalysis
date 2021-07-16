@@ -8,7 +8,7 @@ namespace MoodAnalyzerProblem
 {
     public class MoodAnalyse
     {
-        string message = "I am in Happy mood";
+        string message = null;
         //Default Constructor.......
         public MoodAnalyse() { }
         //Parameterized Constructor.........
@@ -18,13 +18,24 @@ namespace MoodAnalyzerProblem
         }
         public string AnalyseMood()
         {
-            if (message.ToLower().Contains("sad"))
+            try
             {
-                return "SAD";
+                if (message.Equals(string.Empty))
+                {
+                    throw new NullReferenceException();
+                }
+                if (message.ToLower().Contains("sad"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                return "HAPPY";
+                return ex.Message;
             }
         }
     }
