@@ -103,5 +103,60 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual("Constructor not found", ex.Message);
             }
         }
+        /// <summary>
+        /// TC 5.1
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_ShouldReturnMoodAnalysisObject_UsingParameterizedConstructor()
+        {
+            string className = "MoodAnalyzerProblem.MoodAnalyse";
+            string constructorName = "MoodAnalyse";
+            object expected = new MoodAnalyse("Happy");
+            object actual = MoodAnalyseFactory.CreateMoodAnalyseUsingParameter(className, constructorName, "Happy");
+            expected.Equals(actual);
+        }
+        /// <summary>
+        /// TC 5.2
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_ShouldReturnNoSuchClass_UsingParameterizedConstructor()
+        {
+            string expected = "Class not found";
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyserProblem.MoodAnalyse";
+                string constructorName = "MoodAnalyse";
+
+                //Act
+                object resultObj = MoodAnalyseFactory.CreateMoodAnalyseUsingParameter(className, constructorName, expected);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+        /// <summary>
+        /// TC 5.3
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_ShouldReturnNoSuchConstructor_UsingParameterizedConstructor()
+        {
+            string expected = "Constructor not found";
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyzerProblem.MoodAnalyse";
+                string constructorName = "MoodAnalyze";
+                //Act
+                object resultObj = MoodAnalyseFactory.CreateMoodAnalyseUsingDefault(className, constructorName);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }
