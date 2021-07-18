@@ -51,5 +51,57 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        /// <summary>
+        /// TC 4.1
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_ShouldReturnMoodAnalysisObject()
+        {
+            string className = "MoodAnalyzerProblem.MoodAnalyse";
+            string constructorName = "MoodAnalyse";
+            object expected = new MoodAnalyse();
+            object actual = MoodAnalyseFactory.CreateMoodAnalyseUsingDefault(className, constructorName);
+            expected.Equals(actual);
+        }
+        /// <summary>
+        /// TC 4.2
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_ShouldReturnNoSuchClass()
+        {
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyserProblem.MoodAnalyse";
+                string constructorName = "MoodAnalyse";
+                //Act
+                object resultObj = MoodAnalyseFactory.CreateMoodAnalyseUsingDefault(className, constructorName);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual("Class not found", ex.Message);
+            }
+        }
+        /// <summary>
+        /// TC 4.3
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_ShouldReturnNoSuchConstructor()
+        {
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyzerProblem.MoodAnalyse";
+                string constructorName = "MoodAnalyze";
+                //Act
+                object resultObj = MoodAnalyseFactory.CreateMoodAnalyseUsingDefault(className, constructorName);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual("Constructor not found", ex.Message);
+            }
+        }
     }
 }
