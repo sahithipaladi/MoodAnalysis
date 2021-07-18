@@ -158,5 +158,39 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        /// <summary>
+        /// TC 6.1
+        /// </summary>
+        [TestMethod]
+        public void GivenHappyShouldReturnHappy()
+        {
+            ///AAA Methodology
+            //Arrange
+            string expected = "HAPPY";
+            //Act
+            string actual = MoodAnalyseFactory.InvokeAnalyseMethod("Happy", "AnalyseMood");
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+        /// <summary>
+        /// TC 6.2
+        /// </summary>
+        [TestMethod]
+        public void GivenHappyShouldRetuenException()
+        {
+            string expected = "Method not found";
+            try
+            {
+                //Arrange
+                string methodName = "AnalyzeMod";
+                //Act
+                object resultObj = MoodAnalyseFactory.InvokeAnalyseMethod("Happy", methodName);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }
