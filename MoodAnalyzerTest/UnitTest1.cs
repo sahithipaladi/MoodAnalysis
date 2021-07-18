@@ -192,5 +192,59 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        /// <summary>
+        /// TC 7.1
+        /// </summary>
+        [TestMethod]
+        public void GivenHappy_WithReflector_ShouldReturnHappy()
+        {
+            ///AAA Methodology
+            //Arrange
+            string expected = "HAPPY";
+            //Act
+            string actual = MoodAnalyseFactory.SetField("HAPPY", "message");
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+        /// <summary>
+        /// TC 7.2
+        /// </summary>
+        [TestMethod]
+        public void GivenHappy_WithReflector_ShouldReturnNoSuchField()
+        {
+            string expected = "Field not found";
+            try
+            {
+                //Arrange
+                string fieldName = "mesage";
+                //Act
+                string actual = MoodAnalyseFactory.SetField("Happy", fieldName);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+        /// <summary>
+        /// TC 7.3
+        /// </summary>
+        [TestMethod]
+        public void GivenHappy_WithReflector_ShouldReturnNullException()
+        {
+            string expected = "Message should not be null";
+            try
+            {
+                //Arrange
+                string fieldName = "message";
+                //Act
+                string actual = MoodAnalyseFactory.SetField(null, fieldName);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }

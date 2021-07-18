@@ -74,5 +74,25 @@ namespace MoodAnalyzerProblem
                 throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "Method not found");
             }
         }
+        //Reflection to change mood dynamically..........
+        public static string SetField(string message, string fieldName)
+        {
+            try
+            {
+                MoodAnalyse moodAnalyse = new MoodAnalyse();
+                Type type = typeof(MoodAnalyse);
+                FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                if (message == null)
+                {
+                    throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.NULL_EXCEPTION, "Message should not be null");
+                }
+                field.SetValue(moodAnalyse, message);
+                return moodAnalyse.message;
+            }
+            catch (NullReferenceException)
+            {
+                throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.NO_SUCH_FIELD, "Field not found");
+            }
+        }
     }
 }
