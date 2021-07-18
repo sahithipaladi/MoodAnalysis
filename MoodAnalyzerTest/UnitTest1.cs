@@ -10,21 +10,42 @@ namespace MoodAnalyzerTest
         MoodAnalyse moodAnalyse;
 
         /// <summary>
-        /// TC 2.1
+        /// TC 3.1
         /// </summary>
         [TestMethod]
-        public void GivenMessageReturnHappy()
+        public void GivenNullShouldReturnCustomException()
         {
-            ///AAA MEthodology
+            ///AAA Methodology
             //Arrange
-            string expected = "HAPPY";
+            string expected = "Mood should not be null";
             try
             {
                 moodAnalyse = new MoodAnalyse(null);
                 //Act
-                string actual = moodAnalyse.AnalyseMood();
+                moodAnalyse.AnalyseMood();
             }
-            catch (Exception ex)
+            catch (CustomMoodAnalyserException ex)
+            {
+                //Assert
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+        /// <summary>
+        /// TC 3.2
+        /// </summary>
+        [TestMethod]
+        public void GivenEmptyShouldReturnCustomException()
+        {
+            ///AAA Methodology
+            //Arrange
+            string expected = "Mood should not be empty";
+            try
+            {
+                moodAnalyse = new MoodAnalyse(" ");
+                //Act
+                moodAnalyse.AnalyseMood();
+            }
+            catch (CustomMoodAnalyserException ex)
             {
                 //Assert
                 Assert.AreEqual(expected, ex.Message);

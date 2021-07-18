@@ -7,9 +7,16 @@ namespace MoodAnalyzerProblem
         static void Main(string[] args)
         {
             Console.WriteLine("-------------Mood Analyser------------");
-            MoodAnalyse moodAnalyse = new MoodAnalyse();
-            string result = moodAnalyse.AnalyseMood();
-            Console.WriteLine(result);
+            try
+            {
+                MoodAnalyse moodAnalyse = new MoodAnalyse();
+                string result = moodAnalyse.AnalyseMood();
+                Console.WriteLine(result);
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
